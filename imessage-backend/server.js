@@ -20,7 +20,7 @@ app.use(cors())
 app.use(express.json())
 
 //db
-const mongoURI = 'mongodb+srv://kimmyphua:acess123@cluster0.te8qa.mongodb.net/p2Chat?retryWrites=true&w=majority'
+const mongoURI = 'mongodb+srv://kimmyphua:acess123@cluster0.te8qa.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
 mongoose.connect(mongoURI, {
     useCreateIndex: true,
@@ -86,7 +86,6 @@ app.get('/get/conversationList', (req, res) => {
             data.sort((b, a) => {
                 return a.timestamp - b.timestamp;
             });
-
             let conversations = []
 
             data.map((conversationData) => {
@@ -121,6 +120,8 @@ app.get('/get/lastMessage', (req, res) => {
         if (err) {
             res.status(500).send(err)
         } else {
+
+            console.log(data[0])
             let convData = data[0].conversation
 
             convData.sort((b, a) => {
