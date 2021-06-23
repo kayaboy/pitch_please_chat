@@ -66,7 +66,6 @@ app.post('/new/conversation', (req, res) => {
 })
 
 app.post('/new/message', (req, res) => {
-
     mongoData.updateOne(
         {_id: req.query.id},
         {$push: {conversation: req.body, jsId: req.query.jsId, recId: req.query.recId}},
