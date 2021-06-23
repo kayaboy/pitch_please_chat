@@ -53,12 +53,14 @@ app.get('/', (req, res) => res.status(200).send('Hello!'))
 
 app.post('/new/conversation', (req, res) => {
     const dbData = req.body
+    console.log(req.body)
 
     mongoData.create(dbData, (err, data) => {
         if (err) {
             res.status(500).send(err)
         } else {
             res.status(201).send(data)
+            console.log(data)
         }
     })
 })
@@ -66,7 +68,7 @@ app.post('/new/conversation', (req, res) => {
 app.post('/new/message', (req, res) => {
     mongoData.updateOne(
         {_id: req.query.id},
-        {$push: {conversation: req.body}},
+        {$push: {conversation: req.body, jsId: req.query.jsId, recId: req.query.recId}},
         (err, data) => {
             if (err) {
                 console.log("Error sending message...")
